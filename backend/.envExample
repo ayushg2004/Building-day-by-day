@@ -1,0 +1,9 @@
+JWT_SECRET= # our wish to keep any
+MONGO_URI=mongodb: # for local testing
+#Email credintials
+EMAIL_USER=
+EMAIL_PASS= # genertae from gmail manage accounts app passwords section
+#OTP credintials
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_PHONE_NUMBER=
