@@ -28,6 +28,10 @@ const Login = () => {
       // RISK LENE KA HI NHI!!!!
       //   condition lggi ki /home p navigate to token pass hoke hi hoga yha p,hn ye yha p /home token ke baad hi khulega but kai cases mai user manually bhi to /home krke enter krne ki try kr skta h to hmne ye lga dia ki jabh bhi /home p jane ki try ki jaye gi chaye yha se hi chaye manually (kyuki hmme nhi pta) to hmne protected route m check krvane ka faisla liya ki chlo hr baar token match hone ke baad hi route ho , hmme RISK LENE KA HI NHI!!!!
       localStorage.setItem("token", res.data.token);
+
+      // ✅ Save username for welcome popup
+      localStorage.setItem("username", username);
+
       navigate("/home"); // ab yha jb /home p jane lggega to pehle protectedroute m check krke ayega ki token sahi m aagya, kyuki hmne App.jsx mai kha tha routes assign krte waqt ki jb bhi kahi se bhi hm /home p navigate krenge to pehle protectedroute mai  ye token check krvake ayega ki hua bhi ya ese hi krvaya gya h
     } catch (err) {
       alert("Login failed. Please check your credentials.");

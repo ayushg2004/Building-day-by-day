@@ -21,9 +21,30 @@ const API_URL = "https://dummyjson.com/products";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+  const username = localStorage.getItem("username") || "User";
 
   useEffect(() => {
     axios.get(API_URL).then((res) => setProducts(res.data.products));
+  }, []);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowWelcome(false);
+  //   }, 3000); // popup hides after 3 seconds
+
+  //   return () => clearTimeout(timer); // cleanup
+  // }, []);
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => setFadeOut(true), 2500); // start fade out
+    const hideTimer = setTimeout(() => setShowWelcome(false), 3000); // remove completely
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
   const handleSearch = (query) => {
@@ -43,7 +64,13 @@ const Home = () => {
 
   return (
     <>
-      <Navbar /> {/* ✅ Add this here */}
+      <Navbar />
+      {showWelcome && (
+        <div className={`welcome-popup ${fadeOut ? "fade-out" : ""}`}>
+          Welcome {username}, happy to see you here!
+        </div>
+      )}
+
       <div className="container">
         <h1>Product Search</h1>
         <SearchBar onSearch={handleSearch} />

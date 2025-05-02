@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/index.css";
-import PhoneVerification from "../pages/PhoneVerification"; // adjust path if needed
+import PhoneVerification from "../pages/PhoneVerification";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 // a whole signup component is made
 const Signup = () => {
@@ -79,6 +81,40 @@ const Signup = () => {
     } catch (err) {
       setError("Failed! Username or Email might be taken.");
     }
+  };
+
+  // ✅ Handle Google OAuth success
+  const handleGoogleSuccess = async (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential);
+    const email = decoded.email;
+    const name = decoded.name;
+    const picture = decoded.picture;
+
+    if (!isPhoneVerified || !phone) {
+      return alert("Phone verification required before Google Signup.");
+    }
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/google-signup", {
+        email,
+        name,
+        picture,
+        phone, // Include verified phone number
+      });
+
+      // Save token & redirect
+      localStorage.setItem("token", res.data.token);
+      localStorage.removeItem("verifiedPhone");
+      window.location.href = "/home";
+    } catch (err) {
+      setError("Google Signup failed or email already exists.");
+    }
+  };
+
+  // ✅ Handle Google OAuth failure
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
+    setError("Google login failed. Try again.");
   };
 
   return (

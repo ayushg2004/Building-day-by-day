@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import authMiddleware from "./middleware/authMiddleware.js";
 import otpRoutes from "./routes/otpRoutes.js";
+import googleAuthRoutes from "./routes/googleAuthRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -20,7 +21,8 @@ app.get("/api/protected", authMiddleware, (req, res) => {
 });
 
 //  otp ke kaam ke liye keh diya ki bhai otp router se puch ki konse controller m ye kaam hoga
-app.use("/api/otp", otpRoutes);
+app.use("/api/otp", otpRoutes); // OTP route
+app.use("/api/google-login", googleAuthRoutes); // Google login route
 
 // mongoose is a JavaScript library that provides a schema-based solution to model your application data.
 // means mongoose is language to write the schema for the data of mongoDB

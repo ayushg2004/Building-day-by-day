@@ -372,3 +372,35 @@ h1 {
   color: #999;
   cursor: not-allowed;
 }
+
+.welcome-popup {
+  position: fixed;
+  top: 50%; /* vertically center */
+  left: 50%; /* horizontally center */
+  transform: translate(-50%, -50%); /* center exactly */
+  background-color: #4caf50;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-size: 18px;
+  animation: fadein 0.5s ease-in-out;
+  text-align: center;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
