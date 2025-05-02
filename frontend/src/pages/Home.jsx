@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SearchBar from "../components/SearchBar";
 import ProductCard from "../components/ProductCard";
-import Navbar from "../components/Navbar"; // ✅ Import Navbar
+import Navbar from "../components/Navbar";
 import "../styles/index.css";
+import Sidebar from "../components/Sidebar";
 
 // we was given already deployed backend or say what ever it conatins to use for us in this function which is used by us in this frontend we needed .
 // Means to use api ,API is used in frontend only to get the data from the backend and show it in the frontend and to send the data from frontend to backend and then backend will do the task and return the response to the frontend and then frontend will show the response to the user
@@ -28,14 +29,6 @@ const Home = () => {
   useEffect(() => {
     axios.get(API_URL).then((res) => setProducts(res.data.products));
   }, []);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowWelcome(false);
-  //   }, 3000); // popup hides after 3 seconds
-
-  //   return () => clearTimeout(timer); // cleanup
-  // }, []);
 
   useEffect(() => {
     const fadeTimer = setTimeout(() => setFadeOut(true), 2500); // start fade out
@@ -70,6 +63,7 @@ const Home = () => {
           Welcome {username}, happy to see you here!
         </div>
       )}
+      <Sidebar />
 
       <div className="container">
         <h1>Product Search</h1>
