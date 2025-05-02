@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
     //  nodemailer is library and we have installed it in terminal by using npm install nodemailer for using mail functionality
     await sendEmail(
       email, // send to
-      "Welcome to Ayush Gupta's SearchAPI app!", // subject
+      "Welcome to Ayush Gupta's Buildingday-by-day web app!", // subject
       `Hi ${username},\n\nWelcome! You've successfully registered on our platform with ${phone} as mobile number.\n\nThanks for joining us!` // message to be delivered to the user mail
     );
 
